@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>林晨 · Lin Chen — Photographer & Educator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+SC:wght@300;400&family=Libre+Baskerville:ital@1&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #2c2a26;
+    --mist: #f5f2ec;
+    --sage: #8a9e7d;
+    --blush: #d4a89a;
+    --cream: #ede8df;
+    --gold: #b8965a;
+    --sky: #a8bcc8;
+    --paper: #faf8f4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, opacity 0.2s;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 32px; height: 32px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.35s cubic-bezier(.23,1,.32,1), width 0.3s, height 0.3s, opacity 0.3s;
+    opacity: 0.5;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 52px;
+    mix-blend-mode: multiply;
+  }
+  .nav-logo {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.85;
+  }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+  }
+  .nav-links a:hover { opacity: 1; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 64px 80px 72px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    animation: fadeUp 1.2s ease both;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    animation: fadeUp 1.2s 0.15s ease both;
+  }
+  .hero-name .chinese {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.62em;
+    color: var(--sage);
+    display: block;
+    margin-top: 6px;
+  }
+
+  .hero-tagline {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--blush);
+    margin: 32px 0 40px;
+    line-height: 1.7;
+    max-width: 380px;
+    animation: fadeUp 1.2s 0.3s ease both;
+  }
+
+  .hero-dots {
+    display: flex;
+    gap: 10px;
+    animation: fadeUp 1.2s 0.45s ease both;
+  }
+  .hero-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 1.5px solid var(--sage);
+  }
+  .hero-dot:first-child { background: var(--sage); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 44px;
+    left: 72px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    opacity: 0.4;
+    animation: fadeUp 1.5s 0.8s ease both;
+  }
+  .hero-scroll-line {
+    width: 40px;
+    height: 1px;
+    background: var(--ink);
+    animation: expandWidth 2s 1.5s ease both;
+  }
+
+  /* HERO RIGHT — photo collage */
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 30%, rgba(168,188,200,0.25) 0%, transparent 55%),
+      radial-gradient(ellipse at 20% 80%, rgba(138,158,125,0.2) 0%, transparent 50%),
+      var(--cream);
+  }
+
+  .hero-photo-grid {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 6px;
+    padding: 80px 40px 40px 20px;
+    animation: fadeIn 1.8s 0.5s ease both;
+  }
+
+  .photo-block {
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  .photo-block-inner {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.7s cubic-bezier(.23,1,.32,1);
+  }
+  .photo-block:hover .photo-block-inner { transform: scale(1.06); }
+
+  /* Using CSS-generated placeholder photos with layered gradients */
+  .p1 { grid-column: 1/3; grid-row: 1/3; }
+  .p1 .photo-block-inner {
+    background:
+      linear-gradient(160deg, rgba(138,158,125,0.4) 0%, transparent 60%),
+      linear-gradient(to bottom, rgba(44,42,38,0.1), rgba(44,42,38,0.35)),
+      url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80') center/cover;
+  }
+  .p2 { grid-column: 3; grid-row: 1/2; }
+  .p2 .photo-block-inner {
+    background:
+      linear-gradient(to bottom, rgba(44,42,38,0.05), rgba(44,42,38,0.3)),
+      url('https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=300&q=80') center/cover;
+  }
+  .p3 { grid-column: 3; grid-row: 2/3; }
+  .p3 .photo-block-inner {
+    background:
+      url('https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?w=300&q=80') center/cover;
+  }
+  .p4 { grid-column: 1; grid-row: 3/5; }
+  .p4 .photo-block-inner {
+    background:
+      linear-gradient(to top, rgba(44,42,38,0.3), transparent),
+      url('https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=300&q=80') center/cover;
+  }
+  .p5 { grid-column: 2/4; grid-row: 3/4; }
+  .p5 .photo-block-inner {
+    background:
+      url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=500&q=80') center/cover;
+  }
+  .p6 { grid-column: 2; grid-row: 4/5; }
+  .p6 .photo-block-inner {
+    background:
+      url('https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=300&q=80') center/cover;
+  }
+  .p7 { grid-column: 3; grid-row: 4/5; }
+  .p7 .photo-block-inner {
+    background:
+      url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=300&q=80') center/cover;
+  }
+
+  /* floating label on hero */
+  .hero-label {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(250,248,244,0.85);
+    backdrop-filter: blur(8px);
+    border-radius: 3px;
+    padding: 12px 18px;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.7;
+  }
+
+  /* ABOUT */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 80vh;
+    background: var(--ink);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+  .about-texture {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1' cy='1' r='1' fill='rgba(255,255,255,0.025)'/%3E%3C/svg%3E");
+    background-size: 30px 30px;
+  }
+  .about-left {
+    padding: 100px 60px 100px 72px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 36px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-label::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--gold);
+  }
+  .about-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 4vw, 4rem);
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 32px;
+  }
+  .about-heading em {
+    font-style: italic;
+    color: var(--blush);
+  }
+  .about-body {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    opacity: 0.7;
+    max-width: 440px;
+    margin-bottom: 48px;
+  }
+  .about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .tag {
+    padding: 7px 16px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 100px;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    opacity: 0.6;
+    transition: all 0.3s;
+  }
+  .tag:hover {
+    opacity: 1;
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .about-right {
+    position: relative;
+    overflow: hidden;
+  }
+  .about-portrait {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background:
+      radial-gradient(ellipse at 50% 40%, rgba(168,188,200,0.3) 0%, transparent 60%),
+      linear-gradient(135deg, #3a4a3a 0%, #2c2a26 60%, #1a1a1a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .about-portrait-art {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 8rem;
+    opacity: 0.06;
+    user-select: none;
+    line-height: 1;
+    text-align: center;
+  }
+  .about-portrait-overlay {
+    position: absolute;
+    bottom: 48px;
+    left: -1px;
+    background: var(--ink);
+    padding: 20px 28px 20px 24px;
+    max-width: 260px;
+  }
+  .about-portrait-quote {
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: rgba(250,248,244,0.75);
+  }
+  .about-portrait-quote::before { content: '"'; color: var(--gold); font-size: 1.4em; }
+
+  /* WORLDS — the 4 pillars */
+  .worlds {
+    padding: 120px 72px;
+    background: var(--mist);
+  }
+  .worlds-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 72px;
+  }
+  .worlds-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.2;
+  }
+  .worlds-subtitle {
+    font-size: 0.85rem;
+    opacity: 0.5;
+    max-width: 280px;
+    line-height: 1.7;
+    text-align: right;
+  }
+  .worlds-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+  }
+  .world-card {
+    aspect-ratio: 3/4;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .world-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.8s cubic-bezier(.23,1,.32,1);
+  }
+  .world-card:hover .world-bg { transform: scale(1.08); }
+  .world-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(44,42,38,0.85) 0%, rgba(44,42,38,0.1) 50%, transparent 100%);
+    transition: opacity 0.4s;
+  }
+  .world-card:hover .world-overlay { opacity: 0.9; }
+  .world-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 28px 24px;
+    color: white;
+  }
+  .world-icon {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    display: block;
+    filter: drop-shadow(0 0 8px rgba(184,150,90,0.4));
+  }
+  .world-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+  .world-desc {
+    font-size: 0.72rem;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.4s 0.05s;
+    line-height: 1.6;
+    letter-spacing: 0.05em;
+  }
+  .world-card:hover .world-desc { opacity: 0.8; transform: translateY(0); }
+
+  .w1 .world-bg { background: url('https://images.unsplash.com/photo-1448375240586-882707db888b?w=500&q=80') center/cover; }
+  .w2 .world-bg { background: url('https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&q=80') center/cover; }
+  .w3 .world-bg { background: url('https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=500&q=80') center/cover; }
+  .w4 .world-bg { background: url('https://images.unsplash.com/photo-1501084817091-a4f3d1d19e07?w=500&q=80') center/cover; }
+
+  /* GALLERY STRIP */
+  .gallery-strip {
+    padding: 0 0 100px;
+    overflow: hidden;
+    background: var(--mist);
+  }
+  .strip-label {
+    padding: 0 72px 40px;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .strip-label::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--gold);
+  }
+  .marquee-wrapper {
+    display: flex;
+    gap: 12px;
+    animation: marquee 28s linear infinite;
+    width: max-content;
+  }
+  .marquee-wrapper:hover { animation-play-state: paused; }
+  .marquee-img {
+    height: 280px;
+    width: auto;
+    aspect-ratio: 3/2;
+    object-fit: cover;
+    border-radius: 3px;
+    flex-shrink: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.4s ease;
+  }
+  .marquee-img:hover { transform: scale(1.03); }
+  .mi1 { background-image: url('https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=500&q=80'); width: 380px; }
+  .mi2 { background-image: url('https://images.unsplash.com/photo-1519052537078-e6302a4968d4?w=400&q=80'); width: 290px; }
+  .mi3 { background-image: url('https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=400&q=80'); width: 320px; }
+  .mi4 { background-image: url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=500&q=80'); width: 420px; }
+  .mi5 { background-image: url('https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=400&q=80'); width: 300px; }
+  .mi6 { background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=500&q=80'); width: 360px; }
+  .mi7 { background-image: url('https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?w=350&q=80'); width: 310px; }
+  .mi8 { background-image: url('https://images.unsplash.com/photo-1540206395-68808572332f?w=450&q=80'); width: 390px; }
+
+  /* PHILOSOPHY */
+  .philosophy {
+    padding: 130px 72px;
+    background: var(--paper);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .philosophy-left {
+    position: sticky;
+    top: 120px;
+  }
+  .philosophy-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 7rem;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--cream);
+    margin-bottom: 20px;
+    letter-spacing: -0.03em;
+  }
+  .philosophy-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 1.3;
+  }
+  .philosophy-right {
+    padding-top: 10px;
+  }
+  .philosophy-chapter {
+    margin-bottom: 64px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid var(--cream);
+  }
+  .philosophy-chapter:last-child { border-bottom: none; }
+  .chapter-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 16px;
+  }
+  .chapter-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem;
+    font-weight: 400;
+    margin-bottom: 18px;
+    line-height: 1.2;
+  }
+  .chapter-body {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    opacity: 0.65;
+    max-width: 580px;
+  }
+  .chapter-haiku {
+    margin-top: 24px;
+    padding: 20px 24px;
+    border-left: 2px solid var(--blush);
+    font-family: 'Libre Baskerville', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    line-height: 2;
+    color: var(--blush);
+  }
+
+  /* VENTURES */
+  .ventures {
+    background: var(--sage);
+    padding: 120px 72px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ventures::before {
+    content: '美';
+    position: absolute;
+    right: -20px;
+    top: -40px;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 25rem;
+    opacity: 0.05;
+    color: white;
+    line-height: 1;
+  }
+  .ventures-header {
+    color: white;
+    margin-bottom: 70px;
+  }
+  .ventures-header .section-label { color: rgba(255,255,255,0.6); }
+  .ventures-header .section-label::before { background: rgba(255,255,255,0.4); }
+  .ventures-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: white;
+    max-width: 600px;
+  }
+  .ventures-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .venture-card {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(4px);
+    padding: 44px 36px;
+    transition: background 0.3s;
+    position: relative;
+  }
+  .venture-card:hover { background: rgba(255,255,255,0.16); }
+  .venture-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.2);
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+  .venture-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    color: white;
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+  .venture-desc {
+    font-size: 0.83rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.75;
+  }
+  .venture-icon {
+    position: absolute;
+    top: 44px;
+    right: 36px;
+    font-size: 1.4rem;
+    opacity: 0.5;
+  }
+
+  /* CONTACT / FOOTER */
+  footer {
+    background: var(--ink);
+    padding: 120px 72px 60px;
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+  footer::before {
+    content: '林';
+    position: absolute;
+    left: -60px;
+    bottom: -80px;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 28rem;
+    opacity: 0.04;
+    line-height: 1;
+  }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-bottom: 100px;
+  }
+  .footer-left .footer-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 36px;
+  }
+  .footer-left .footer-heading em {
+    font-style: italic;
+    color: var(--blush);
+  }
+  .footer-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    transition: gap 0.3s;
+  }
+  .footer-email:hover { gap: 20px; }
+  .footer-email-arrow { font-size: 1.2rem; }
+  .footer-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 32px;
+  }
+  .footer-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .footer-link {
+    color: rgba(250,248,244,0.45);
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .footer-link::before {
+    content: '→';
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    transform: translateX(-4px);
+  }
+  .footer-link:hover { color: var(--paper); }
+  .footer-link:hover::before { opacity: 1; transform: translateX(0); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-copy {
+    font-size: 0.7rem;
+    opacity: 0.3;
+    letter-spacing: 0.1em;
+  }
+  .footer-loc {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.7rem;
+    opacity: 0.3;
+  }
+  .footer-loc-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--sage);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes expandWidth {
+    from { width: 0; }
+    to { width: 40px; }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.3); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  /* Reveal animations on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s cubic-bezier(.23,1,.32,1), transform 0.9s cubic-bezier(.23,1,.32,1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Floating ghibli cat */
+  .ghibli-cat {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    font-size: 1.8rem;
+    animation: float 4s ease-in-out infinite;
+    z-index: 50;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 24px 28px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 100px 28px 60px; }
+    .hero-right { height: 60vw; }
+    .hero-scroll { left: 28px; }
+    .about { grid-template-columns: 1fr; }
+    .about-right { height: 60vw; }
+    .about-left { padding: 60px 28px; }
+    .worlds { padding: 80px 28px; }
+    .worlds-grid { grid-template-columns: repeat(2, 1fr); }
+    .worlds-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .worlds-subtitle { text-align: left; }
+    .philosophy { grid-template-columns: 1fr; padding: 80px 28px; }
+    .philosophy-left { position: static; }
+    .ventures { padding: 80px 28px; }
+    .ventures-grid { grid-template-columns: 1fr; }
+    footer { padding: 80px 28px 40px; }
+    .footer-inner { grid-template-columns: 1fr; gap: 40px; }
+    .gallery-strip .strip-label { padding: 0 28px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Floating cat -->
+<div class="ghibli-cat">🐱</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">林晨 · Lin Chen</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#worlds">Worlds</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#ventures">Ventures</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Photographer · Educator · Creator</p>
+    <h1 class="hero-name">
+      Lin Chen
+      <span class="chinese">林晨</span>
+    </h1>
+    <p class="hero-tagline">
+      Capturing the tender light between moments —<br>
+      where nature breathes, hearts open,<br>and cats dream of forests.
+    </p>
+    <div class="hero-dots">
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+    </div>
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+      Scroll
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-bg"></div>
+    <div class="hero-photo-grid">
+      <div class="photo-block p1"><div class="photo-block-inner"></div></div>
+      <div class="photo-block p2"><div class="photo-block-inner"></div></div>
+      <div class="photo-block p3"><div class="photo-block-inner"></div></div>
+      <div class="photo-block p4"><div class="photo-block-inner"></div></div>
+      <div class="photo-block p5"><div class="photo-block-inner"></div></div>
+      <div class="photo-block p6"><div class="photo-block-inner"></div></div>
+      <div class="photo-block p7"><div class="photo-block-inner"></div></div>
+    </div>
+    <div class="hero-label">Göteborg, Sweden</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-texture"></div>
+  <div class="about-left">
+    <div class="section-label">About</div>
+    <h2 class="about-heading">
+      Between two <em>worlds</em>,<br>at home in all of them
+    </h2>
+    <p class="about-body">
+      Born in China, rooted in Sweden, I move through the world with a camera and an open heart.
+      Nine years in Waldorf kindergartens taught me that childhood is sacred. Educational research showed me that learning is a form of art. Photography reminds me every day that light — like love — is everywhere.
+    </p>
+    <p class="about-body" style="margin-top:-16px">
+      I write. I teach. I grow organic things. I watch Ghibli films on rainy afternoons with a cat on my lap.
+      And I'm building something beautiful.
+    </p>
+    <div class="about-tags">
+      <span class="tag">🌿 Nature</span>
+      <span class="tag">👤 Portraiture</span>
+      <span class="tag">🎋 China · Sweden</span>
+      <span class="tag">🐱 Cat lover</span>
+      <span class="tag">📖 Writer</span>
+      <span class="tag">🌱 Waldorf</span>
+      <span class="tag">✨ Ghibli Soul</span>
+      <span class="tag">🌾 Organic Living</span>
+    </div>
+  </div>
+  <div class="about-right">
+    <div class="about-portrait">
+      <div class="about-portrait-art">自然<br>美丽<br>光</div>
+    </div>
+    <div class="about-portrait-overlay">
+      <p class="about-portrait-quote">The light in Sweden is unlike any other — it holds the whole sky in a single hour.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORLDS -->
+<section class="worlds" id="worlds">
+  <div class="worlds-header">
+    <h2 class="worlds-title reveal">Four worlds,<br>one eye</h2>
+    <p class="worlds-subtitle reveal">Every photograph is a threshold — an invitation to step gently into the sacred ordinary.</p>
+  </div>
+  <div class="worlds-grid">
+    <div class="world-card w1 reveal">
+      <div class="world-bg"></div>
+      <div class="world-overlay"></div>
+      <div class="world-content">
+        <span class="world-icon">🌿</span>
+        <div class="world-title">Nature</div>
+        <div class="world-desc">Forests, seasons, the patience of moss — finding infinity in the quiet wild.</div>
+      </div>
+    </div>
+    <div class="world-card w2 reveal">
+      <div class="world-bg"></div>
+      <div class="world-overlay"></div>
+      <div class="world-content">
+        <span class="world-icon">🤍</span>
+        <div class="world-title">People</div>
+        <div class="world-desc">Faces holding stories, hands that tell of work and love — the human landscape.</div>
+      </div>
+    </div>
+    <div class="world-card w3 reveal">
+      <div class="world-bg"></div>
+      <div class="world-overlay"></div>
+      <div class="world-content">
+        <span class="world-icon">🌸</span>
+        <div class="world-title">Childhood</div>
+        <div class="world-desc">Nine years among Waldorf children taught me: wonder is a skill, not an age.</div>
+      </div>
+    </div>
+    <div class="world-card w4 reveal">
+      <div class="world-bg"></div>
+      <div class="world-overlay"></div>
+      <div class="world-content">
+        <span class="world-icon">🌅</span>
+        <div class="world-title">Tender Moments</div>
+        <div class="world-desc">The touch between goodbye and return — the emotions that only light can hold.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY STRIP -->
+<div class="gallery-strip">
+  <div class="strip-label">Selected Works</div>
+  <div style="overflow:hidden">
+    <div class="marquee-wrapper">
+      <div class="marquee-img mi1"></div>
+      <div class="marquee-img mi2"></div>
+      <div class="marquee-img mi3"></div>
+      <div class="marquee-img mi4"></div>
+      <div class="marquee-img mi5"></div>
+      <div class="marquee-img mi6"></div>
+      <div class="marquee-img mi7"></div>
+      <div class="marquee-img mi8"></div>
+      <!-- Duplicate for seamless loop -->
+      <div class="marquee-img mi1"></div>
+      <div class="marquee-img mi2"></div>
+      <div class="marquee-img mi3"></div>
+      <div class="marquee-img mi4"></div>
+      <div class="marquee-img mi5"></div>
+      <div class="marquee-img mi6"></div>
+      <div class="marquee-img mi7"></div>
+      <div class="marquee-img mi8"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-left">
+    <div class="philosophy-number reveal">思</div>
+    <h2 class="philosophy-heading reveal">How I see the world</h2>
+  </div>
+  <div class="philosophy-right">
+    <div class="philosophy-chapter reveal">
+      <div class="chapter-tag">Photography</div>
+      <h3 class="chapter-title">A photograph is a conversation with time</h3>
+      <p class="chapter-body">
+        I don't take photographs — I receive them. A camera is a listening device.
+        The job of a photographer is to become very quiet, very still, so that a moment can choose to enter the frame.
+        This is something I learned from forests first, and from children second.
+      </p>
+      <div class="chapter-haiku">
+        The cat sits longer<br>
+        than the photographer —<br>
+        she knows how to wait.
+      </div>
+    </div>
+    <div class="philosophy-chapter reveal">
+      <div class="chapter-tag">Education & Research</div>
+      <h3 class="chapter-title">Learning as a living art</h3>
+      <p class="chapter-body">
+        Waldorf education gave me back my belief in slowness. In a world optimizing for speed,
+        I spent nine years watching children knead bread, water seeds, and listen to stories by candlelight.
+        That is my research: what happens to a child when beauty is the curriculum?
+      </p>
+    </div>
+    <div class="philosophy-chapter reveal">
+      <div class="chapter-tag">Writing & Organic Living</div>
+      <h3 class="chapter-title">Words are seeds. Plants are sentences.</h3>
+      <p class="chapter-body">
+        I write because some things cannot be photographed. The smell of rain on pine needles.
+        The particular quiet of early morning in Göteborg.
+        My organic shop is not a business — it is an extension of a philosophy: that what we put in and on our bodies is a form of storytelling.
+      </p>
+    </div>
+    <div class="philosophy-chapter reveal">
+      <div class="chapter-tag">Between East and West</div>
+      <h3 class="chapter-title">Two cultures, one heart</h3>
+      <p class="chapter-body">
+        Growing up between China and Sweden means I am always translating — not just language, but light.
+        Chinese ink painting taught me negative space. Swedish seasons taught me about surviving darkness with grace.
+        My work lives in the conversation between these two inheritances.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- VENTURES -->
+<section class="ventures" id="ventures">
+  <div class="ventures-header reveal">
+    <div class="section-label">What's Coming</div>
+    <h2 class="ventures-title">Building a world<br>of beautiful living</h2>
+  </div>
+  <div class="ventures-grid">
+    <div class="venture-card reveal">
+      <div class="venture-num">01</div>
+      <div class="venture-icon">📸</div>
+      <h3 class="venture-title">Photography Studio & Visual Storytelling</h3>
+      <p class="venture-desc">Portraits, nature, documentary — commissioned work and gallery exhibitions bridging Chinese and Nordic aesthetics.</p>
+    </div>
+    <div class="venture-card reveal">
+      <div class="venture-num">02</div>
+      <div class="venture-icon">🌿</div>
+      <h3 class="venture-title">Organic Living Shop</h3>
+      <p class="venture-desc">Carefully curated organic products — cosmetics, teas, home essentials — grounded in the philosophy that beauty begins with what you choose.</p>
+    </div>
+    <div class="venture-card reveal">
+      <div class="venture-num">03</div>
+      <div class="venture-icon">🎋</div>
+      <h3 class="venture-title">Art & Education Collective</h3>
+      <p class="venture-desc">Workshops, retreats and cultural programming blending Waldorf pedagogy, Chinese arts, and Nordic design thinking.</p>
+    </div>
+    <div class="venture-card reveal">
+      <div class="venture-num">04</div>
+      <div class="venture-icon">✍️</div>
+      <h3 class="venture-title">Writing & Publications</h3>
+      <p class="venture-desc">Essays, visual diaries, and research that explores the intersection of childhood, culture, nature, and the art of seeing.</p>
+    </div>
+    <div class="venture-card reveal">
+      <div class="venture-num">05</div>
+      <div class="venture-icon">🌏</div>
+      <h3 class="venture-title">Cultural Bridge Programs</h3>
+      <p class="venture-desc">Exchange initiatives connecting communities in China and Sweden through art, education, and shared human experience.</p>
+    </div>
+    <div class="venture-card reveal">
+      <div class="venture-num">06</div>
+      <div class="venture-icon">🌸</div>
+      <h3 class="venture-title">Mindful Lifestyle Brand</h3>
+      <p class="venture-desc">A future brand embodying the calm, beautiful, and intentional way of moving through the world — slow fashion, seasonal living, creative education.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER / CONTACT -->
+<footer id="contact">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <h2 class="footer-heading reveal">
+        Let's create something<br><em>beautiful</em> together
+      </h2>
+      <a href="mailto:hello@linchen.com" class="footer-email reveal">
+        hello@linchen.com
+        <span class="footer-email-arrow">→</span>
+      </a>
+    </div>
+    <div class="footer-right reveal">
+      <div class="footer-links">
+        <a href="#" class="footer-link">Photography</a>
+        <a href="#" class="footer-link">Organic Shop</a>
+        <a href="#" class="footer-link">Education</a>
+        <a href="#" class="footer-link">Writings</a>
+        <a href="#" class="footer-link">About</a>
+        <a href="#" class="footer-link">Instagram</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Lin Chen · 林晨 · All rights reserved</span>
+    <div class="footer-loc">
+      <div class="footer-loc-dot"></div>
+      Göteborg, Sweden · 哥德堡，瑞典
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+
+  // Smooth ring follow
+  function animateCursor() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  // Cursor grow on hover
+  document.querySelectorAll('a, button, .world-card, .venture-card, .marquee-img').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      ring.style.width = '56px';
+      ring.style.height = '56px';
+      ring.style.opacity = '0.25';
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.style.width = '32px';
+      ring.style.height = '32px';
+      ring.style.opacity = '0.5';
+    });
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Staggered reveal for siblings
+  document.querySelectorAll('.worlds-grid, .ventures-grid, .footer-links').forEach(grid => {
+    const children = grid.querySelectorAll('.reveal');
+    children.forEach((child, i) => {
+      child.style.transitionDelay = (i * 0.08) + 's';
+    });
+  });
+</script>
+</body>
+</html>
